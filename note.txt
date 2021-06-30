@@ -1,0 +1,25 @@
+ const fetchData = async () => {
+    try {
+      const response = await axios.get("https://coronavirusapi-france.vercel.app/FranceLiveGlobalData"); 
+      setData(response.data.FranceGlobalLiveData); 
+      //console.log(response.data.FranceGlobalLiveData);
+      setIsLoading(false); 
+    } catch (e) {
+      console.log("fetching data failed")
+    }
+  }; 
+
+  const fetchDataDep = async () => {
+    try {
+      const response = await axios.get("https://coronavirusapi-france.vercel.app/LiveDataByDepartement?Departement=Essonne"); 
+      setDataDep(response.data.LiveDataByDepartement); 
+      setIsLoading(false); 
+    } catch (e) {
+      console.log("fetching data failed")
+    }
+  }; 
+
+  useEffect (()=> {
+    fetchData();
+    fetchDataDep();
+  }, [])
